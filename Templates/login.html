@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load crispy_forms_filters %}
+<b>User Login</b>
+{% if messages %}
+    <ul class="alert alert-warning" style="list-style: none;">
+        {% for message in messages %}
+            <li {% if message.tages %} class="{{message.tages}}" {% endif %}>
+                {{message}}
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+<form method="post">
+    {% csrf_token %}
+    <div class="row">
+        <div class="form-group col-md-12">
+            {{login_form.email|as_crispy_field }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-12">
+            {{login_form.password|as_crispy_field }}
+        </div>
+    </div>
+    {% for fields in login_form %}
+        {% for errors in fields.errors %}
+                <p>
+                    <small style="color: red;">{{errors}}</small>
+                </p>
+        {% endfor %}
+    {% endfor %}
+    {% if login_form.non_field_errors %}
+            <p>
+                <small style="color: red;">{{login_form.non_field_errors}}</small>
+            </p>
+    {% endif %}
+    <input type="submit" class="btn btn-dark" value="Login">
+    <a href="{% url 'user:login' %}"><input type="button" class="btn btn-danger" value="Cancel"></a>
+</form>
+<hr>
+Not have an account? <a href="{% url 'user:register' %}">Register</a>
+<hr>
+<a href="{% url 'user:password_reset' %}">Forget Password? </a>
+{% endblock content %}

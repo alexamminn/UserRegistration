@@ -1,0 +1,14 @@
+
+.container{
+    width: 40%;
+    margin: auto;
+    border: 1px solid;
+    padding: 20px;
+    bottom: 30%;
+    margin-top: 100px;
+}
+@media screen and (max-width: 800px) {
+        .container{
+            width: 80%;
+        }
+    }

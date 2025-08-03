@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if messages %}
+    <ul class="messages alert alert-warning" style="list-style: none;">
+        {% for message in messages %}
+            <li {% if message.tag %} class="{{message.tag}}" {% endif %}>{{message}}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+{% if request.user.is_authenticated %}
+    {{request.user}} | 
+    <a href="{% url 'user:Change_Password' %}">Change Password</a> | 
+    <a href="{% url 'user:logout' %}">Logout</a>
+{% endif %}
+{% endblock content %}

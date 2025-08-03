@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load crispy_forms_filters %}
+<b>User Registration</b>
+<form method="post">
+    {% csrf_token %}
+    <div class="row">
+        <div class="form-group col-md-12">
+            {{form.username | as_crispy_field }}
+        </div>
+        <div class="form-group col-md-12">
+            {{form.first_name | as_crispy_field }}
+        </div>
+        <div class="form-group col-md-12">
+            {{form.last_name | as_crispy_field }}
+        </div>
+        <div class="form-group col-md-12">
+            {{form.email | as_crispy_field }}
+        </div>
+        <div class="form-group col-md-12">
+            {{form.password1 | as_crispy_field }}
+        </div>
+        <div class="form-group col-md-12">
+            {{form.password2 | as_crispy_field }}
+        </div>
+    </div>
+    <input type="submit" class="btn btn-info" value="Reigster">
+    <a href="{% url 'user:register' %}"><input type="button" class="btn btn-danger" value="Cancel"></a>
+    <hr>
+    Already have an account? <a href="{% url 'user:login' %}">Login</a>
+</form>
+{% endblock content %}
